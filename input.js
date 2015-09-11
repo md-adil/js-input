@@ -22,6 +22,7 @@ var input = (function(){
 		},
 		not: {
 			value: function(names) {
+				if(names == undefined) return this;
 				if(typeof names == 'string') {
 					delete this[names];
 				} else {
@@ -44,14 +45,15 @@ var input = (function(){
 	return function(names) {
 		var qstr = Object.create(Input);
 		if(typeof names == 'string') return query[names];
+		if(names instanceof Array) {
+			for (var i = 0; i < names.length; i++) {
+				var name = names[i];
+				if(query[name] !== undefined) qstr[name] = query[name];
+			};
+			return qstr;
+		}
 		for(var q in query) {
-			if(names instanceof Array) {
-				if(names.indexOf(q) !== -1) {
-					qstr[q] = query[q];
-				}
-			} else {
-				qstr[q] = query[q];
-			}
+			qstr[q] = query[q];
 		}
 		return qstr;
 	}
