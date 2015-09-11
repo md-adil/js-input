@@ -25,6 +25,13 @@ input(['names', 'roll'])
 {name: 'somename', roll: 'developer'}
 
 /*
+* @param object
+*/
+input().append({appeded: 'this-is-append'})
+// output object
+{name: 'somename', roll: 'developer', ..., appeded: 'this-is-append'}
+
+/*
 * @param array or string
 */
 input().not(['name', 'roll'])
